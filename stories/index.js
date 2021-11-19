@@ -104,7 +104,7 @@ storiesOf("Button", module)
         <InterviewerListItem
           name={interviewer.name}
           avatar={interviewer.avatar}
-          onChange={action("setInterviewer")}
+          onChange={action("onChange")}
         />
       ));
       const interviewers = [
@@ -133,7 +133,7 @@ storiesOf("Button", module)
         .add("Clickable", () => (
           <InterviewerList
             interviewers={interviewers}
-            onChange={action("setInterviewer")}
+            onChange={action("onChange")}
 
           />
         ));
@@ -146,11 +146,9 @@ storiesOf("Button", module)
         .add("Header",()=><Header time="12pm"/>)
         .add("Empty", ()=><Empty onAdd={action("onAdd")}/>)
         .add("Show", ()=><Show student="Lydia" interviewer={interviewers[0]} onEdit={action("onEdit")} onDelete={action("onDelete")}/>)
-        .add("Error", ()=><Error message="Could not delete appointment." onClose={action("onClose")} />)
-        .add("Edit", ()=>{
-          <Form student="Mark" interviewer={interviewers[0].id} interviewers={interviewers} onSave={action("onSave")} onCancel={action("onCancel")}/>
-        })
-        .add("Create", ()=>{
+        .add("Error", ()=><Form student="Mark" interviewer={interviewers[0].id} interviewers={interviewers} onSave={action("onSave")} onCancel={action("onCancel")} />)
+        .add("Edit", ()=><Form student="Mark" interviewer={interviewers[0].id} interviewers={interviewers} onSave={action("onSave")} onCancel={action("onCancel")} student="Mark M"/>)
+        .add("Create", ()=>
           <Form interviewers={interviewers} onSave={action("onSave")} onCancel={action("onCancel")}
-        />});
+        />);
           
