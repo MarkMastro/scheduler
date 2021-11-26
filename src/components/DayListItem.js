@@ -18,7 +18,6 @@ export default function DayListItem(props) {
   const dayClass=classNames("day-list__item",
     {"day-list__item--selected" : props.selected},
     {"day-list__item--full" : !props.spots})
-  console.log(props)
   const availability=formatSpots(props.spots)
   return (
     <li className={dayClass} onClick={props.setDay}>
