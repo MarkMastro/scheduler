@@ -3,7 +3,6 @@ import Button from "components/Button";
 import React, { useState } from 'react';
 
 export default function Form(props){
-
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
@@ -12,6 +11,10 @@ export default function Form(props){
     props.onCancel();
   }
 
+  const validate=()=>{
+    props.save(student, interviewer)
+  }
+  console.log("interviewer", interviewer)
   return(
 
     <main className="appointment__card appointment__card--create">
@@ -35,7 +38,7 @@ export default function Form(props){
   <section className="appointment__card-right">
     <section className="appointment__actions">
       <Button danger onClick={reset}>Cancel</Button>
-      <Button confirm onClick={props.onSave}>Save</Button>
+      <Button confirm onSubmit={event => event.preventDefault()} onClick={validate}>Save</Button>
     </section>
   </section>
 </main>

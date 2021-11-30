@@ -6,6 +6,7 @@ export default function InterviewerList (props){
 
   const {interviewers, onChange, interviewer}=props;
 
+
   const interviewerArray=interviewers.map((interviewerArr)=>{
     return(
       <InterviewerListItem 
@@ -16,7 +17,6 @@ export default function InterviewerList (props){
       setInterviewer={()=>onChange(interviewerArr.id)}
       />
     )
-   
   })
 
   return(
