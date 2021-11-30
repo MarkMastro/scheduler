@@ -7,6 +7,7 @@ import Form from "./Form";
 import Status from "./Status";
 import useVisualMode from "hooks/useVisualMode";
 import Confirm from "./Confirm";
+import Error from "./Error";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
@@ -20,6 +21,7 @@ const ERROR_DELETE = "ERROR_DELETE"
 
 
 export default function Appointment(props){
+  
 
   const  save=(name, interviewer) => {
     const interview = {
@@ -30,13 +32,10 @@ export default function Appointment(props){
     props.bookInterview(props.id, interview)
     .then(()=>{
       transition(SHOW)
-
     })
-  }
-
-  const confirm =()=>{
-    transition(CONFIRM)
-    //props.cancelInterview(id)
+    .catch(()=>{
+      transition(ERROR_SAVE)
+    })
   }
 
   const destroy=()=>{
@@ -46,8 +45,14 @@ export default function Appointment(props){
       transition(EMPTY)
     })
     .catch(()=>{
-
+      console.log("was a error")
+      transition(ERROR_DELETE)
     })
+  }
+
+  const confirm =()=>{
+    transition(CONFIRM)
+    //props.cancelInterview(id)
   }
 
   const cancel=()=>{
@@ -85,6 +90,9 @@ console.log(props.interview ? "SHOW" : "EMPTY")
        />}
         {mode === SAVING && <Status />}
         {mode === CONFIRM && <Confirm onCancel={cancel} onDelete={destroy}/>}
+        {mode === ERROR_SAVE && <Error message={"error"}/>}
+        {mode === ERROR_DELETE && <Error message={"error"}/>}
+
     </article>
 
   )
