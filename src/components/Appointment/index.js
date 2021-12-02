@@ -54,7 +54,6 @@ export default function Appointment(props){
     transition(EDIT)
   }
 
-console.log(props.interview ? "SHOW" : "EMPTY")
  const {mode, transition, back} = useVisualMode(props.interview ? SHOW : EMPTY);
 
  return(

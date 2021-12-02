@@ -11,7 +11,6 @@ export default function useVisualMode(initial){
   
     replace ? history[history.length-1] = newMode : setHistory(prev => ([...prev, mode]))
     setMode(newMode)
-    console.log(history)
 
   }
 

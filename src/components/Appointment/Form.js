@@ -14,7 +14,6 @@ export default function Form(props){
   const validate=()=>{
     props.save(student, interviewer)
   }
-  console.log("interviewer", interviewer)
   return(
 
     <main className="appointment__card appointment__card--create">
