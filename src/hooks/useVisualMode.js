@@ -9,8 +9,9 @@ export default function useVisualMode(initial){
 
   const transition=(newMode, replace = false)=>{
   
-    replace ? history[history.length-1] = newMode : history.push(newMode)
+    replace ? history[history.length-1] = newMode : setHistory(prev => ([...prev, mode]))
     setMode(newMode)
+    console.log(history)
 
   }
 

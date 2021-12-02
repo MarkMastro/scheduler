@@ -30,29 +30,20 @@ export default function Appointment(props){
     };
     transition(SAVING)
     props.bookInterview(props.id, interview)
-    .then(()=>{
-      transition(SHOW)
-    })
-    .catch(()=>{
-      transition(ERROR_SAVE)
-    })
+    .then(()=>transition(SHOW))
+    .catch(()=>transition(ERROR_SAVE, true))
   }
 
   const destroy=()=>{
-    transition(SAVING)
-    props.cancelInterview(props.id)
-    .then(()=>{
-      transition(EMPTY)
-    })
-    .catch(()=>{
-      console.log("was a error")
-      transition(ERROR_DELETE)
-    })
+    transition(SAVING, true)
+    props
+    .cancelInterview(props.id)
+    .then(()=>transition(EMPTY))
+    .catch(()=>transition(ERROR_DELETE, true))
   }
 
   const confirm =()=>{
     transition(CONFIRM)
-    //props.cancelInterview(id)
   }
 
   const cancel=()=>{
@@ -90,8 +81,8 @@ console.log(props.interview ? "SHOW" : "EMPTY")
        />}
         {mode === SAVING && <Status />}
         {mode === CONFIRM && <Confirm onCancel={cancel} onDelete={destroy}/>}
-        {mode === ERROR_SAVE && <Error message={"error"}/>}
-        {mode === ERROR_DELETE && <Error message={"error"}/>}
+        {mode === ERROR_SAVE && <Error message={"error"} onClose={back}/>}
+        {mode === ERROR_DELETE && <Error message={"error"} onClose={back  }/>}
 
     </article>
 
