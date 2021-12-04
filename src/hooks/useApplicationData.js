@@ -15,9 +15,11 @@ const bookInterview=(id, interview)=>{
   };
     return axios.put(`/api/appointments/${id}`, appointment)
     .then(()=>{
-      spotsRemaining(appointments);
+      const days=spotsRemaining(appointments);
       setState({...state, 
-        appointments})
+        appointments,
+        days})
+        console.log("state",state)
      
     })
   
@@ -36,11 +38,11 @@ const bookInterview=(id, interview)=>{
   };
     return axios.delete(`/api/appointments/${id}`)
     .then(res => {
-      spotsRemaining(appointments);
+      const days=spotsRemaining(appointments);
       setState({...state, 
-        appointments})
-    })
-    .then(res=>{
+        appointments,
+        days
+      })
     })
   };
 
@@ -66,18 +68,21 @@ const bookInterview=(id, interview)=>{
   }, []);
 
   const spotsRemaining=(appointments)=>{
-    let spots=0;
-    for(let day of state.days){
-      if(day.name===state.day){
-        for(let appointment of day.appointments){
-          if(!appointments[appointment].interview){
-            spots++;
-            day.spots=spots;
-          }
-        }
+    const newDays = [...state.days];
+    let spots = 0;
+
+    const index=state.days.findIndex(day=>day.name === state.day)
+    const dayObj=state.days.find(day=>day.name ===state.day);
+    for(let appointmentid of dayObj.appointments){
+      if(!appointments[appointmentid].interview){
+        spots++;
       }
     }
-    console.log(state.day)
+    const newDay={...dayObj, spots}
+    console.log("newday",newDay)
+    newDays[index] = newDay;
+    console.log("new days", newDays)
+    return newDays
   }
 
 
