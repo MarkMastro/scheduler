@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 export default function Form(props){
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [error, setError] = useState("")
 
   const reset=()=>{
     setStudent("");
@@ -12,7 +13,13 @@ export default function Form(props){
   }
 
   const validate=()=>{
-    props.save(student, interviewer)
+
+    if(student === ""){
+      setError("Student name cannot be blank");
+      return;
+    }
+
+    props.onSave(student, interviewer)
   }
   return(
 
@@ -20,6 +27,7 @@ export default function Form(props){
   <section className="appointment__card-left">
     <form autoComplete="off" onSubmit={event => event.preventDefault()}>
       <input
+        data-testid="student-name-input"
         className="appointment__create-input text--semi-bold"
         name={props.student}
         type="text"
@@ -27,7 +35,10 @@ export default function Form(props){
         onChange={(event)=>setStudent(event.target.value)}
         value={student}
       />
+    <section className="appointment__validation">{error}</section>
+
     </form>
+
     <InterviewerList 
     interviewers={props.interviewers}
     onChange={setInterviewer}
