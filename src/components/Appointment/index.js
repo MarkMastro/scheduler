@@ -80,8 +80,8 @@ export default function Appointment(props){
        />}
         {mode === SAVING && <Status message= {"Saving"}/>}
         {mode === CONFIRM && <Confirm onCancel={cancel} onDelete={destroy}/>}
-        {mode === ERROR_SAVE && <Error message={"error"} onClose={back}/>}
-        {mode === ERROR_DELETE && <Error message={"error"} onClose={back  }/>}
+        {mode === ERROR_SAVE && <Error message={"Error encoutered while attempting to save"} onClose={back}/>}
+        {mode === ERROR_DELETE && <Error message={"Error encoutered while attempting to delete"} onClose={back  }/>}
 
     </article>
 

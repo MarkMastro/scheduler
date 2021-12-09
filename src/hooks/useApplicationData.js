@@ -19,7 +19,6 @@ const bookInterview=(id, interview)=>{
       setState({...state, 
         appointments,
         days})
-        console.log("state",state)
      
     })
   
@@ -79,9 +78,7 @@ const bookInterview=(id, interview)=>{
       }
     }
     const newDay={...dayObj, spots}
-    console.log("newday",newDay)
     newDays[index] = newDay;
-    console.log("new days", newDays)
     return newDays
   }
 
